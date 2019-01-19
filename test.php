@@ -22,9 +22,6 @@ function CallAPI($method, $url, $data = false)
                 $url = sprintf("%s?%s", $url, http_build_query($data));
     }
 
-    // Optional Authentication:
-    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 
@@ -38,6 +35,23 @@ function CallAPI($method, $url, $data = false)
 
 $response = CallAPI('GET','https://s1-en.ogame.gameforge.com/api/universes.xml');
 
-var_dump($response);
-//print string(1121) " "
+$xml = htmlentities($response);
+
+$xml = serialize($xml);
+$xml = str_replace("s:1563:", '', $xml);
+$xml = str_replace(";", '', $xml);
+
+echo $xml;
+
+// Hasta aqui funciona
+/*$xmlObject = simplexml_load_string($xml);
+
+$jsonString = json_encode($xmlObject);
+$jsonArray = json_decode($jsonString, true);*/
+ 
+//var_dump out the $jsonArray, just so we can
+//see what the end result looks like
+//var_dump($jsonArray);
+
+//echo json_encode($jsonString);
 ?>
