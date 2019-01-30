@@ -4,6 +4,7 @@
 
     $server = validateServer();
     $loc = validateLoc();
+    $id = validateId();
 
-    echo request($server, $loc, 'playerData.xml');
+    echo requestId($server, $loc, $id, 'playerData.xml');
 ?>

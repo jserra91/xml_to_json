@@ -1,20 +1,9 @@
 ﻿<?php
-    include 'xml2json.php';
+    include 'request.php';
+    include 'validations.php';
 
-    if (isset($_GET["server"])) {
-        $server = $_GET["server"];
-    } else {
-        $server = 's1'
-    }
-    if (isset($_GET["loc"])) {
-        $loc = $_GET["loc"];
-    } else {
-        echo
-        $loc = 'es'
-    }
+    $server = validateServer();
+    $loc = validateLoc();
 
-    $xmlNode = simplexml_load_file('https://' + $server + '-' + $loc + '.ogame.gameforge.com/api/universes.xml');
-    $arrayData = xmlToArray($xmlNode);
-    header('Content-Type: application/json');
-    echo json_encode($arrayData);
+    echo request($server, $loc, 'players.xml');
 ?>

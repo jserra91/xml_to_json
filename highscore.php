@@ -7,5 +7,5 @@
     $category = validateCategory();
     $type = validateType();
 
-    echo request($server, $loc, 'players.xml');
+    echo requestH($server, $loc, $category, $type, 'highscore.xml');
 ?>
